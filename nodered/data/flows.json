@@ -1,0 +1,133 @@
+[
+    {
+        "id": "afac86258de7b6e2",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "917e16f92bedecfc",
+        "type": "mqtt-broker",
+        "name": "Greenhouse MQTT Broker",
+        "broker": "host.docker.internal",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "91dd54f69453a0f9",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "GreenhouseDB",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": "10",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "e9cb5f789d736fd2",
+        "type": "influxdb out",
+        "z": "afac86258de7b6e2",
+        "influxdb": "91dd54f69453a0f9",
+        "name": "add_to_greenhouse_bucket",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "myorg",
+        "bucket": "greenhouse",
+        "x": 1080,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "b09d7ad117e3258c",
+        "type": "function",
+        "z": "afac86258de7b6e2",
+        "name": "parse_topic",
+        "func": "const topicParts = msg.topic.split('/');\nconst data = topicParts[1];\n\n// Get the sensor value dynamically from msg.payload\nconst value = msg.payload;\n\nmsg.measurement = data\n\nmsg.payload = \n[\n  {\n    value,\n  }\n];\n\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 380,
+        "wires": [
+            [
+                "e9cb5f789d736fd2"
+            ]
+        ]
+    },
+    {
+        "id": "8f08912e93482c8b",
+        "type": "mqtt in",
+        "z": "afac86258de7b6e2",
+        "name": "humidity_subscriber",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "917e16f92bedecfc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "b09d7ad117e3258c",
+                "0522bdfdcc7de1f1"
+            ]
+        ]
+    },
+    {
+        "id": "0522bdfdcc7de1f1",
+        "type": "debug",
+        "z": "afac86258de7b6e2",
+        "name": "final_message",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 280,
+        "wires": []
+    }
+]
