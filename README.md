@@ -19,7 +19,7 @@ An autonomous driving project using the CARLA simulator
 Open a terminal and run:
 ```bash
 git clone https://github.com/sarosh2/Autonomous_Project_CARLA.git
-cd <your-project-directory>
+cd Autonomous_Project_CARLA
 ```
 
 ### 3️⃣ Build and Run Docker Services
