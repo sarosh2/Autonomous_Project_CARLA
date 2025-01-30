@@ -10,7 +10,7 @@
     {
         "id": "917e16f92bedecfc",
         "type": "mqtt-broker",
-        "name": "Greenhouse MQTT Broker",
+        "name": "Autonomous MQTT Broker",
         "broker": "host.docker.internal",
         "port": "1883",
         "clientid": "",
@@ -95,7 +95,7 @@
         "id": "8f08912e93482c8b",
         "type": "mqtt in",
         "z": "afac86258de7b6e2",
-        "name": "humidity_subscriber",
+        "name": "autonomous_subscriber",
         "topic": "#",
         "qos": "2",
         "datatype": "auto-detect",
@@ -104,7 +104,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 490,
+        "x": 500,
         "y": 380,
         "wires": [
             [

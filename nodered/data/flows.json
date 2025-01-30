@@ -10,7 +10,7 @@
     {
         "id": "917e16f92bedecfc",
         "type": "mqtt-broker",
-        "name": "Greenhouse MQTT Broker",
+        "name": "Autonomous MQTT Broker",
         "broker": "host.docker.internal",
         "port": "1883",
         "clientid": "",
@@ -45,7 +45,7 @@
         "port": "8086",
         "protocol": "http",
         "database": "database",
-        "name": "GreenhouseDB",
+        "name": "AutonomousDB",
         "usetls": false,
         "tls": "",
         "influxdbVersion": "2.0",
@@ -58,7 +58,7 @@
         "type": "influxdb out",
         "z": "afac86258de7b6e2",
         "influxdb": "91dd54f69453a0f9",
-        "name": "add_to_greenhouse_bucket",
+        "name": "add_to_autonomous_bucket",
         "measurement": "",
         "precision": "",
         "retentionPolicy": "",
@@ -66,7 +66,7 @@
         "precisionV18FluxV20": "ms",
         "retentionPolicyV18Flux": "",
         "org": "myorg",
-        "bucket": "greenhouse",
+        "bucket": "autonomous",
         "x": 1080,
         "y": 460,
         "wires": []
@@ -95,7 +95,7 @@
         "id": "8f08912e93482c8b",
         "type": "mqtt in",
         "z": "afac86258de7b6e2",
-        "name": "humidity_subscriber",
+        "name": "autonomous_subscriber",
         "topic": "#",
         "qos": "2",
         "datatype": "auto-detect",
@@ -104,7 +104,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 490,
+        "x": 500,
         "y": 380,
         "wires": [
             [

@@ -37,12 +37,3 @@ services:
       - influxdb
     volumes:
       - ./nodered/data:/data
-
-  grafana:
-    image: grafana/grafana
-    ports:
-      - "3000:3000"  # Grafana UI port
-    depends_on:
-      - influxdb
-    volumes:
-      - ./grafana/data:/var/lib/grafana
